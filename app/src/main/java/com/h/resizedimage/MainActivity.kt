@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity(), UploadImageViewPresenter {
         selectImage.setOnClickListener {
             CropImage.startPickImageActivity(this)
         }
+
+        selectVideo.setOnClickListener {
+            startActivity(Intent(this,VideoActivity::class.java))
+        }
     }
 
     private fun cropImage(uri: Uri) {
@@ -99,6 +103,7 @@ class MainActivity : AppCompatActivity(), UploadImageViewPresenter {
                         "compressbitmaptofile",
                         "bitmap to file : " + bitmapToFile(bitmapCompress!!).path
                     )
+
 
                 } catch (e: IOException) {
                     e.printStackTrace()
