@@ -30,6 +30,7 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.*
@@ -145,7 +146,7 @@ class MainActivity : AppCompatActivity(), UploadImageViewPresenter {
             builder.addFormDataPart(
                 "file[]",
                 file.name,
-                RequestBody.create(MediaType.parse("multipart/form-data"), file)
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
             )
           val request = builder.build()
             presenter.uploadImageDetail(request, token)

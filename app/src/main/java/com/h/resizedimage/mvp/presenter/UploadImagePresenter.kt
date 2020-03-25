@@ -9,6 +9,7 @@ import com.h.resizedimage.mvp.view.UploadImageViewPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 class UploadImagePresenter : Presenter {
@@ -23,6 +24,16 @@ class UploadImagePresenter : Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onUploadImageSuccess){
                         t -> onUploadFileFail("Upload Image không thành công !",t)
+                }
+        )
+    }
+
+    fun uploadVideoDetail(images: MultipartBody.Part, token:String){
+        composite.add(
+            ApiUtil.getAPIService().uploadVideo(images,token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onUploadImageSuccess){ t -> onUploadFileFail("Upload Image không thành công !",t)
                 }
         )
     }
